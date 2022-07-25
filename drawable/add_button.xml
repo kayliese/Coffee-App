@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid
+                android:color="@color/white"
+                />
+            <corners
+                android:radius="40dp"
+                />
+            <stroke
+                android:color="@color/mediumBrown"
+                android:width="0.5dp"/>
+            <padding
+                android:right="4dp"
+                android:left="4dp"
+                android:top="4dp"
+                android:bottom="4dp"/>
+        </shape>
+    </item>
+    <item android:drawable="@drawable/ic_baseline_add_24" />
+</layer-list>

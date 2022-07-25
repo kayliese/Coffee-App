@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.coffee_order.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_dashboard"
+            app:destination="@id/navigation_dashboard" />
+        <action
+            android:id="@+id/action_home_to_details"
+            app:destination="@id/navigation_itemDetails"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.coffee_order.ui.favorites.FavoritesFragments"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_favorites">
+        <action
+            android:id="@+id/action_dashboard_to_notifications"
+            app:destination="@id/navigation_notifications" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.coffee_order.ui.cart.CartFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_cart">
+        <action
+            android:id="@+id/action_notifications_to_profile"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.coffee_order.ui.profile.ProfileFragment"
+        android:label="@string/profile"
+        tools:layout="@layout/fragment_profile" />
+
+    <activity
+        android:id="@+id/navigation_itemDetails"
+        android:name="com.coffee_order.ui.itemDetails.ItemDetails"
+        android:label="Details"
+        tools:layout="@layout/activity_item_details" />
+</navigation>

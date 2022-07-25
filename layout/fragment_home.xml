@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.coffee_order.ui.home.HomeViewModel" />
+        <import type="android.view.View"/>
+    </data>
+
+   <androidx.core.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+           android:layout_marginVertical="@dimen/activity_vertical_margin"
+           android:orientation="vertical"
+           tools:context=".ui.home.HomeFragment">
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <EditText
+                   android:id="@+id/search_bar"
+                   android:layout_width="0dp"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintEnd_toStartOf="@id/search_button"
+                   android:layout_marginEnd="10dp"
+                   app:layout_constraintTop_toTopOf="parent"
+                   android:textSize="16sp"
+                   android:textColor="@color/mediumBrown"
+                   android:textColorHint="@color/lightBrown"
+                   android:hint="Search ..."
+                   android:layout_height="wrap_content"/>
+               <ImageButton
+                   android:id="@+id/search_button"
+                   android:layout_width="35dp"
+                   android:layout_height="35dp"
+                   android:padding="5dp"
+                   android:onClick="@{viewModel::changeVisibility}"
+                   android:background="@android:color/transparent"
+                   android:src="@drawable/ic_baseline_search_24"
+                   android:scaleType="centerCrop"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:tint="@color/black" />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+
+           <HorizontalScrollView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="16dp"
+               android:scrollbars="none">
+
+               <com.google.android.material.chip.ChipGroup
+                   android:id="@+id/chip_group"
+                   android:layout_width="wrap_content"
+                   android:layout_height="match_parent"
+                   app:checkedChip="@id/allChip"
+                   app:selectionRequired="true"
+                   app:singleLine="true"
+                   app:singleSelection="true">
+
+                   <com.google.android.material.chip.Chip
+                       android:id="@+id/allChip"
+                       style="@style/Widget.MaterialComponents.Chip.Choice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:minWidth="100dp"
+                       android:text="All"
+                       android:textAlignment="center"
+                       android:textAppearance="@style/Theme.CustomChip"
+                       android:textColor="@color/chip_text_color"
+                       app:chipBackgroundColor="@color/chip_bg_color" />
+
+                   <com.google.android.material.chip.Chip
+                       android:id="@+id/hotCoffeeChip"
+                       style="@style/Widget.MaterialComponents.Chip.Choice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:minWidth="100dp"
+                       android:text="Hot Coffee"
+                       android:textAlignment="center"
+                       android:textAppearance="@style/Theme.CustomChip"
+                       android:textColor="@color/chip_text_color"
+                       app:chipBackgroundColor="@color/chip_bg_color" />
+
+                   <com.google.android.material.chip.Chip
+                       android:id="@+id/foodItemsChip"
+                       style="@style/Widget.MaterialComponents.Chip.Choice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:minWidth="100dp"
+                       android:text="Food Items"
+                       android:textAlignment="center"
+                       android:textAppearance="@style/Theme.CustomChip"
+                       android:textColor="@color/chip_text_color"
+                       app:chipBackgroundColor="@color/chip_bg_color" />
+
+                   <com.google.android.material.chip.Chip
+                       android:id="@+id/drinksChip"
+                       style="@style/Widget.MaterialComponents.Chip.Choice"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:minWidth="100dp"
+                       android:text="Drinks"
+                       android:textAlignment="center"
+                       android:textAppearance="@style/Theme.CustomChip"
+                       android:textColor="@color/chip_text_color"
+                       app:chipBackgroundColor="@color/chip_bg_color" />
+               </com.google.android.material.chip.ChipGroup>
+           </HorizontalScrollView>
+
+           <LinearLayout
+               android:id="@+id/user_tile"
+               android:layout_marginTop="16dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center_vertical"
+               android:orientation="horizontal">
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@{`Hello `+viewModel.userName+`!`}"
+                       android:textColor="@color/darkBrown"
+                       android:textSize="16sp"
+                       android:textStyle="bold" />
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:visibility="gone"
+               android:id="@+id/single_itemView">
+
+               <androidx.recyclerview.widget.RecyclerView
+                   android:id="@+id/recyclerView"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:paddingTop="16dp"
+                   android:paddingEnd="16dp"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/title"
+                   tools:listitem="@layout/item_list_layout" />
+
+               <TextView
+                   android:id="@+id/title"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Hot Coffee"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:textAppearance="@style/Theme.ItemTitle"/>
+           </androidx.constraintlayout.widget.ConstraintLayout>
+           <androidx.constraintlayout.widget.ConstraintLayout
+               android:id="@+id/all_itemView"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:visibility="visible"
+               >
+               <TextView
+                   android:id="@+id/title_hc"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Hot Coffee"
+                   app:layout_constraintTop_toTopOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:textAppearance="@style/Theme.ItemTitle"/>
+               <TextView
+                   android:id="@+id/viewAllButton"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@color/mediumBrown"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="parent"
+                   android:text="View All"/>
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/hc_recyclerView"
+                       android:layout_width="match_parent"
+                       tools:listitem="@layout/item_list_layout"
+                       android:orientation="horizontal"
+                       android:layout_height="wrap_content"
+                       app:layout_constraintTop_toBottomOf="@id/title_hc"
+                       />
+               <TextView
+                   android:id="@+id/title_fi"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Food Items"
+                   android:layout_marginTop="16dp"
+                   app:layout_constraintTop_toBottomOf="@id/hc_recyclerView"
+                   app:layout_constraintStart_toStartOf="parent"
+                   android:textAppearance="@style/Theme.ItemTitle"/>
+               <TextView
+                   android:id="@+id/viewAllButtonFi"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:textColor="@color/mediumBrown"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintTop_toTopOf="@id/title_fi"
+                   android:text="View All"/>
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:id="@+id/fi_recyclerView"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       app:layout_constraintTop_toBottomOf="@id/title_fi"
+                       />
+           </androidx.constraintlayout.widget.ConstraintLayout>
+       </LinearLayout>
+   </androidx.core.widget.NestedScrollView>
+</layout>
